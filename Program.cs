@@ -27,12 +27,13 @@ class Program{
         string path = @"Information_Employees.txt";
         using (StreamReader readFile = new StreamReader(path))
         {
-            string stringFromFile;
+            string? stringFromFile;
             while ((stringFromFile = readFile.ReadLine()) != null){
                 string[] consoleWrite  = stringFromFile.Split('#');
                 foreach (var el in consoleWrite){
                     Console.Write($"{el} ");
                 }
+                Console.WriteLine();
             }
         }
         Console.ReadLine();
