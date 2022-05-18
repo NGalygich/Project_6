@@ -21,20 +21,50 @@ class Program{
             id++;
             sw.WriteLine(id + "#" + date.ToString("dd/MM/yyyy HH:mm") + "#" + fullName + "#" + age + "#" + height + "#" + birthDay.ToString("dd/MM/yyyy") + "#" + birthPlace);
         }
+        Console.Clear();
     }
     static public void OutputFromFile(){
-        //string path = @"Information_Employees.txt";
+        string path = @"Information_Employees.txt";
+        using (StreamReader readFile = new StreamReader(path))
+        {
+            string stringFromFile;
+            while ((stringFromFile = readFile.ReadLine()) != null){
+                string[] consoleWrite  = stringFromFile.Split('#');
+                foreach (var el in consoleWrite){
+                    Console.Write($"{el} ");
+                }
+            }
+        }
+        Console.ReadLine();
+        Console.Clear();
     }
     static public void Main(){
         bool s = false;
         while(!s){
-            Console.WriteLine("1 - Display information about employees;");
-            Console.WriteLine("2 - Add a new entry to the end of the file.");
-            Console.Write("Select action: ");
-            byte choice = Convert.ToByte(Console.ReadLine());
-            if (choice == 1) OutputFromFile();
-            else if (choice == 2) InputInFile();
-            else s = true;
+            Console.WriteLine("watch - Display information about employees;");
+            Console.WriteLine("add - Add a new entry to the end of the file;");
+            Console.WriteLine("exit - Close program.");
+            Console.Write("Select comand: ");
+            string? comand = Console.ReadLine();
+            switch (comand){
+                case "watch":
+                    Console.Clear();
+                    OutputFromFile();
+                    break;
+                case "add":
+                    Console.Clear();
+                    InputInFile();
+                    break;
+                case "exit":
+                    Console.Clear();
+                    s = true;
+                    break;
+                default:
+                    Console.WriteLine("Comand not found!");
+                    Console.ReadLine();
+                    Console.Clear();
+                    break;
+            }      
         }
     }
 }
